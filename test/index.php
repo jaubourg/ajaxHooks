@@ -10,17 +10,21 @@
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
 
-	<script src="../src/ajax/css.js"></script>
-	<script src="../src/ajax/img.js"></script>
-	<script src="../src/ajax/xdr.js"></script>
+	<?php
+		$modules = json_decode( file_get_contents( "../build/data/modules.json" ), true );
+		foreach( $modules as $module => $_ ) {
+			?><script src="../src/<?= $module ?>.js"></script><?php
+		}
+	?>
 
 	<script src="qunit/qunit/qunit.js"></script>
-	
 	<script src="init.js"></script>
 
-	<script src="unit/ajax/css.js"></script>
-	<script src="unit/ajax/img.js"></script>
-	<script src="unit/ajax/xdr.js"></script>
+	<?php
+		foreach( $modules as $module => $_ ) {
+			?><script src="unit/<?= $module ?>.js"></script><?php
+		}
+	?>
 
 </head>
 <body id="body">
