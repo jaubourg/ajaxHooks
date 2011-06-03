@@ -9,9 +9,7 @@ JS_ENGINE ?= `which node nodejs`
 COMPILER = ${JS_ENGINE} ${BUILD_DIR}/uglify.js --unsafe
 POST_COMPILER = ${JS_ENGINE} ${BUILD_DIR}/post-compile.js
 
-BASE_FILES = ${SRC_DIR}/ajax/img.js\
-	${SRC_DIR}/ajax/css.js\
-	${SRC_DIR}/ajax/xdr.js
+BASE_FILES = $(shell ${JS_ENGINE} ${BUILD_DIR}/get_modules.js ${BUILD_DIR}/data/modules.json ${SRC_DIR})
 
 MODULES = ${BUILD_DIR}/intro.js\
 	${BASE_FILES}\
@@ -32,7 +30,7 @@ core: ajaxHooks min lint
 
 ${DIST_DIR}:
 	@@mkdir -p ${DIST_DIR}
-
+	
 ajaxHooks: ${AH}
 
 ${AH}: ${MODULES} | ${DIST_DIR}
@@ -56,7 +54,7 @@ min: ajaxHooks ${AH_MIN}
 
 ${AH_MIN}: ${AH}
 	@@if test ! -z ${JS_ENGINE}; then \
-		echo "Minifying jQuery" ${AH_MIN}; \
+		echo "Minifying jQuery ajaxHooks" ${AH_MIN}; \
 		${COMPILER} ${AH} > ${AH_MIN}.tmp; \
 		${POST_COMPILER} ${AH_MIN}.tmp > ${AH_MIN}; \
 		rm -f ${AH_MIN}.tmp; \

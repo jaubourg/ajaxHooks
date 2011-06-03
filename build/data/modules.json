@@ -1,0 +1,5 @@
+{
+	"ajax/css": "CSS Transport",
+	"ajax/img": "Image Transport",
+	"ajax/xdr": "XDomainRequest Transport"
+}
