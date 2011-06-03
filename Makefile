@@ -11,9 +11,9 @@ POST_COMPILER = ${JS_ENGINE} ${BUILD_DIR}/post-compile.js
 
 BASE_FILES = $(shell ${JS_ENGINE} ${BUILD_DIR}/get_modules.js ${BUILD_DIR}/data/modules.json ${SRC_DIR})
 
-MODULES = ${BUILD_DIR}/intro.js\
+MODULES = ${BUILD_DIR}/data/intro.js\
 	${BASE_FILES}\
-	${BUILD_DIR}/outro.js
+	${BUILD_DIR}/data/outro.js
 
 AH = ${DIST_DIR}/jquery-ajaxhooks.js
 AH_MIN = ${DIST_DIR}/jquery-ajaxhooks.min.js
