@@ -18,7 +18,7 @@ MODULES = ${BUILD_DIR}/data/intro.js\
 AH = ${DIST_DIR}/jquery-ajaxhooks.js
 AH_MIN = ${DIST_DIR}/jquery-ajaxhooks.min.js
 
-AH_VER = $(shell cat version.txt)
+AH_VER = $(shell cat ${BUILD_DIR}/data/version.txt)
 VER = sed "s/@VERSION/${AH_VER}/"
 
 DATE=$(shell git log -1 --pretty=format:%ad)
