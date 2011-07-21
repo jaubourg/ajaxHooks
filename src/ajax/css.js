@@ -1,30 +1,79 @@
 (function( jQuery ) {
 
-var	cssHead = jQuery( document.head || document.getElementsByTagName( "head" )[ 0 ] || document.documentElement ),
-	cssIsWebkit = jQuery.browser.webkit,
-	cssNeedsPolling = cssIsWebkit || jQuery.browser.mozilla,
+var	cssHead = document.head || document.getElementsByTagName( "head" )[ 0 ] || document.documentElement,
+	cssEmptyURL = "data:text/css,",
+	cssNeedsPolling = (function() {
+		var defer = $._Deferred(),
+			onload = cssLoad( { url: cssEmptyURL }, false, function() {
+				defer.resolve( false );
+			});
+		// Give a little room
+		// so that we get the onload event
+		setTimeout(function() {
+			onload( true );
+			defer.resolve( true );
+		}, 0 );
+		return defer;
+	})(),
 	cssTimer,
-	cssPollingId = jQuery.now(),
+	cssPollingId = 0,
 	cssPollingNb = 0,
 	cssPolled = {};
 
 function cssGlobalPoller() {
-	var id,
-		link,
-		sheet;
+	var id, sheet;
 	for( id in cssPolled ) {
-		link = cssPolled[ id ];
-		sheet = link[ 0 ].sheet;
+		sheet = cssPolled[ id ].sheet;
 		try {
-			if ( cssIsWebkit ? sheet : ( sheet.cssRules.length != null ) ) {
-				link.trigger( "load" );
+			if ( sheet && !sheet.cssRules /* <= webkit */ || sheet.cssRules.length != null /* <= firefox */ ) {
+				cssPolled[ id ].onload();
 			}
 		} catch( e ) {
-			if ( ( e.code == 1e3 ) || ( e.message == "security" || e.message == "denied" ) ) {
-				link.trigger( "load" );
+			if ( ( e.code === 1e3 ) || ( e.message === "security" || e.message === "denied" ) ) {
+				cssPolled[ id ].onload();
 			}
 		}
 	}
+}
+
+function cssLoad( s, polling, callback ) {
+	var link = jQuery( "<link/>", {
+			charset: s.scriptCharset || "",
+			media: s.media || "all",
+			rel: "stylesheet",
+			type: "text/css"
+		}).appendTo( cssHead )[ 0 ];
+	if ( polling ) {
+		cssPolled[( id = ( cssPollingId++ ) )] = link;
+		if ( !( cssPollingNb++ ) ) {
+			cssTimer = setInterval( cssGlobalPoller, 13 );
+		}
+	}
+	link.onload = function( isCancel ) {
+		if ( link.onload ) {
+			if ( polling ) {
+				delete cssPolled[ id ];
+				if ( !( --cssPollingNb ) ) {
+					clearInterval( cssTimer );
+				}
+			}
+			link.onload = null;
+			if ( isCancel === true ) {
+				// resetting href avoids a crash in IE6
+				// and a display bug in webkit
+				// Using "data:text/css," ensures webkit doesn't do
+				// an unnecessary network request
+				link.href = cssEmptyURL;
+				cssHead.removeChild( link );
+			} else {
+				callback( link );
+			}
+		}
+	};
+	// Only way to make it work in IE before the DOM
+	// is ready is to set href after appending
+	link.href = s.url;
+	return link.onload;
 }
 
 jQuery.ajaxPrefilter( "css", function( s ) {
@@ -36,54 +85,28 @@ jQuery.ajaxPrefilter( "css", function( s ) {
 	s.global = false;
 });
 
-jQuery.ajaxTransport("css", function(s) {
-	var callback;
+jQuery.ajaxTransport( "css", function( s ) {
+	var cancel;
 	return {
 		send: function( _ , complete ) {
-			var link, id;
-			link = jQuery( "<link/>" ).attr({
-				rel: "stylesheet",
-				type: "text/css",
-				media: s.media || "screen",
-				href: s.url
+			cancel = jQuery.noop;
+			cssNeedsPolling.done(function( needsPolling ) {
+				if ( cancel ) {
+					cancel = cssLoad( s, needsPolling, function( link ) {
+						cancel = undefined;
+						complete( 200, "OK", { css: jQuery( link ) } );
+					});
+				}
 			});
-			if ( s.scriptCharset ) {
-				link[ 0 ].charset = s.scriptCharset;
-			}
-			if ( cssNeedsPolling ) {
-				cssPolled[( id = ( cssPollingId++ ) )] = link;
-				if ( !( cssPollingNb++ ) ) {
-					cssTimer = setInterval( cssGlobalPoller, 13 );
-				}
-			}
-			link.bind( "load", ( callback = function() {
-				if ( cssNeedsPolling ) {
-					delete cssPolled[ id ];
-					if ( !( --cssPollingNb ) ) {
-						clearInterval( cssTimer );
-					}
-				}
-				link.unbind( "load" );
-				// If not aborting
-				if ( callback ) {
-					callback = undefined;
-					setTimeout( function() {
-						complete( 200, "OK", { css: link } );
-					} , 0 );
-				} else {
-					link.remove();
-				}
-			} ));
-			cssHead.append( link );
 		},
 		abort: function() {
-			if ( callback ) {
-				var tmp = callback;
-				callback = undefined;
-				tmp();
+			if ( cancel ) {
+				var tmp = cancel;
+				cancel = undefined;
+				tmp( true );
 			}
 		}
 	};
-});
+} );
 
 })( jQuery );
