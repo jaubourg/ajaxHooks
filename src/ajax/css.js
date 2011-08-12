@@ -1,6 +1,6 @@
 (function( jQuery ) {
 
-var	cssHead = document.head || document.getElementsByTagName( "head" )[ 0 ] || document.documentElement,
+var cssHead = document.head || document.getElementsByTagName( "head" )[ 0 ] || document.documentElement,
 	cssEmptyURL = "data:text/css,",
 	cssNeedsPolling = (function() {
 		var defer = $._Deferred(),
@@ -37,7 +37,8 @@ function cssGlobalPoller() {
 }
 
 function cssLoad( s, polling, callback ) {
-	var link = jQuery( "<link/>", {
+	var id,
+		link = jQuery( "<link/>", {
 			charset: s.scriptCharset || "",
 			media: s.media || "all",
 			rel: "stylesheet",
@@ -77,7 +78,7 @@ function cssLoad( s, polling, callback ) {
 }
 
 jQuery.ajaxPrefilter( "css", function( s ) {
-	if ( s.cache == null ) {
+	if ( s.cache === undefined ) {
 		s.cache = false;
 	}
 	s.type = "GET";
