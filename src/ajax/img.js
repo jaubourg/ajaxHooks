@@ -22,6 +22,8 @@ jQuery.ajaxTransport( "img", function( s ) {
 					} else {
 						complete( 404, "Not Found" );
 					}
+				} else {
+					img.src = null;
 				}
 			};
 			image = new Image();
