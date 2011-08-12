@@ -47,5 +47,5 @@
 			equals( jQuery.active, 0, "No AJAX requests are still active" );
 			oldActive = jQuery.active;
 		}
-	}
+	};
 }());
