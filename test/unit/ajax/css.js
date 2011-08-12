@@ -49,13 +49,12 @@ test( "abort", function() {
 		});
 	stop();
 	request.done(function() {
-		strictEqual( arguments, undefined );
+		ok( false, "success" );
 	}).fail(function() {
 		ok( true, "error" );
 		setTimeout( function() {
 			notStrictEqual( div.css("marginLeft") , "27px" , "rule is not applied" );
+			start();
 		}, 1500 );
-	}).always(function() {
-		setTimeout( start, 2000 );
 	}).abort();
 });
