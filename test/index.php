@@ -8,7 +8,7 @@
 
 	<link rel="Stylesheet" media="screen" href="qunit/qunit/qunit.css" />
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 
 	<?php
 		$modules = json_decode( file_get_contents( "../build/data/modules.json" ), true );
