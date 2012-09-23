@@ -2,9 +2,8 @@
 
 var cssHead = document.head || document.getElementsByTagName( "head" )[ 0 ] || document.documentElement,
 	cssEmptyURL = "data:text/css,",
-	cssNeedsPolling = (function() {
-		var defer = $._Deferred(),
-			onload = cssLoad( { url: cssEmptyURL }, false, function() {
+	cssNeedsPolling = $.Deferred(function( defer ) {
+		var onload = cssLoad( { url: cssEmptyURL }, false, function() {
 				defer.resolve( false );
 			});
 		// Give a little room
@@ -13,8 +12,7 @@ var cssHead = document.head || document.getElementsByTagName( "head" )[ 0 ] || d
 			onload( true );
 			defer.resolve( true );
 		}, 0 );
-		return defer;
-	})(),
+	}),
 	cssTimer,
 	cssPollingId = 0,
 	cssPollingNb = 0,
