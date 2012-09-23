@@ -1,0 +1,33 @@
+{
+  "options": {
+    "evil": true,
+    "browser": true,
+    "wsh": true,
+    "eqnull": true,
+    "expr": true,
+    "curly": true,
+    "trailing": true,
+    "undef": true,
+    "smarttabs": true,
+    "maxerr": 100,
+    "sub": true
+  },
+  "globals": {
+    "jQuery": true,
+    "QUnit": true,
+    "ok": true,
+    "equal": true,
+    "test": true,
+    "asyncTest": true,
+    "notEqual": true,
+    "deepEqual": true,
+    "strictEqual": true,
+    "notStrictEqual": true,
+    "start": true,
+    "stop": true,
+    "expect": true,
+    "raises": true,
+    "module": true,
+    "moduleTeardown": true
+  }
+}

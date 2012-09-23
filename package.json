@@ -1,0 +1,26 @@
+{
+	"name": "jquery.ajaxhooks",
+	"title": "jQuery ajaxHooks",
+	"description": "jQuery AJAX & Deferred utilities",
+	"version": "1.0.0pre",
+	"homepage": "https://github.com/jaubourg/ajaxHooks",
+	"author": "Julian Aubourg <j@ubourg.net>",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/jaubourg/ajaxHooks.git"
+	},
+	"bugs": {
+		"url": "https://github.com/jaubourg/ajaxHooks/issues"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "http://opensource.org/licenses/mit-license.php"
+		}
+	],
+	"dependencies": {},
+	"devDependencies": {
+		"grunt": "~0.3.9"
+	},
+	"keywords": []
+}

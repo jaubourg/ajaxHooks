@@ -1,0 +1,18 @@
+{
+  "options": {
+    "evil": true,
+    "browser": true,
+    "wsh": true,
+    "eqnull": true,
+    "expr": true,
+    "curly": true,
+    "trailing": true,
+    "undef": true,
+    "smarttabs": true,
+    "sub": true,
+    "maxerr": 100
+  },
+  "globals": {
+    "jQuery": true
+  }
+}
