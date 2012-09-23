@@ -19,7 +19,7 @@
 	<script src="//code.jquery.com/jquery-<?= $jquery_version ?>.js"></script>
 
 	<?php
-		$modules = json_decode( file_get_contents( "../build/data/modules.json" ), true );
+		$modules = json_decode( file_get_contents( "../build/modules.json" ), true );
 		foreach( $modules as $module => $_ ) {
 			?><script src="../src/<?= $module ?>.js"></script><?php
 		}
