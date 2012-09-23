@@ -1,5 +1,3 @@
-(function( jQuery ) {
-
 var cssHead = document.head || document.getElementsByTagName( "head" )[ 0 ] || document.documentElement,
 	cssEmptyURL = "data:text/css,",
 	cssNeedsPolling = $.Deferred(function( defer ) {
@@ -107,5 +105,3 @@ jQuery.ajaxTransport( "css", function( s ) {
 		}
 	};
 } );
-
-})( jQuery );

@@ -1,5 +1,3 @@
-(function( jQuery ) {
-
 if ( window.XDomainRequest ) {
 	jQuery.ajaxTransport(function( s ) {
 		if ( s.crossDomain && s.async ) {
@@ -41,4 +39,3 @@ if ( window.XDomainRequest ) {
 		}
 	});
 }
-})( jQuery );

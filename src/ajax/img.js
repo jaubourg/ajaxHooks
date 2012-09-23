@@ -1,5 +1,3 @@
-(function( jQuery ) {
-
 jQuery.ajaxPrefilter( "img", function( s ) {
 	if ( s.cache == null ) {
 		s.cache = false;
@@ -42,5 +40,3 @@ jQuery.ajaxTransport( "img", function( s ) {
 		}
 	};
 });
-
-})( jQuery );

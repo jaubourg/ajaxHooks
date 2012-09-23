@@ -37,8 +37,6 @@ ${AH}: ${MODULES} | ${DIST_DIR}
 	@@echo "Building" ${AH}
 
 	@@cat ${MODULES} | \
-		sed 's/.function..jQuery...{//' | \
-		sed 's/}...jQuery..;//' | \
 		sed 's/@DATE/'"${DATE}"'/' | \
 		${VER} > ${AH};
 
