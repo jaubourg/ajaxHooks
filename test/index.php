@@ -1,4 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php
+
+	$jquery_version = isset( $_GET[ "jquery" ] ) ? $_GET[ "jquery" ] : "git";
+
+	if ( $jquery_version !== "git" ) {
+		$jquery_version .= ".min"; 
+	}
+
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr" id="html">
 <head>
 
@@ -8,7 +16,7 @@
 
 	<link rel="Stylesheet" media="screen" href="qunit/qunit/qunit.css" />
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/jquery-<?= $jquery_version ?>.js"></script>
 
 	<?php
 		$modules = json_decode( file_get_contents( "../build/data/modules.json" ), true );
