@@ -1,5 +1,6 @@
 {
 	"ajax/css": "CSS Transport",
 	"ajax/img": "Image Transport",
-	"ajax/xdr": "XDomainRequest Transport"
+	"ajax/xdr": "XDomainRequest Transport",
+	"deferred/whenever": "When utility waiting for completion, no matter the end state"
 }
