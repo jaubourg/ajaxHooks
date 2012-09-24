@@ -1,6 +1,7 @@
 {
 	"ajax/css": "CSS Transport",
 	"ajax/img": "Image Transport",
+	"ajax/laxjson": "Lax json parsing",
 	"ajax/xdr": "XDomainRequest Transport",
 	"callbacks/topic": "Publish/Subscribe",
 	"deferred/whenarray": "When and whenever with a single array as input",

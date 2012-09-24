@@ -1,0 +1,4 @@
+{
+	deferred: jQuery.Deferred(),
+	string: "test-" + 6
+}
