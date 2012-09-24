@@ -1,5 +1,5 @@
-[jQuery ajaxHooks] - a collection of jQuery.ajax extensions
-===========================================================
+jQuery ajaxHooks - a collection of jQuery.ajax extensions
+=========================================================
 
 What you need to build your own ajaxHooks
 -----------------------------------------
