@@ -83,16 +83,18 @@ test("joined", function() {
 
 	jQuery.each( deferreds, function( id1, defer1 ) {
 		jQuery.each( deferreds, function( id2, defer2 ) {
-			var expected = 
-					( willSucceed[ id1 ] || willError[ id1 ] )
-					&& ( willSucceed[ id1 ] || willError[ id1 ] )
-					&& jQuery.map( [ id1, id2 ], function( id ) {
+			var expected =
+					( willSucceed[ id1 ] || willError[ id1 ] ) &&
+					( willSucceed[ id1 ] || willError[ id1 ] ) &&
+					jQuery.map( [ id1, id2 ], function( id ) {
 						return {
 							state: willSucceed[ id ] ? "resolved" : "rejected",
 							value:  willSucceed[ id ] ? 1 : 0
 						};
 					}),
-				expectedNotify = ( willNotify[ id1 ] || willNotify[ id2 ] ) && [ willNotify[ id1 ], willNotify[ id2 ] ],
+				expectedNotify =
+					( willNotify[ id1 ] || willNotify[ id2 ] ) &&
+					[ willNotify[ id1 ], willNotify[ id2 ] ],
 				code = id1 + "/" + id2,
 				context1 = defer1 && jQuery.isFunction( defer1.promise ) ? defer1 : window,
 				context2 = defer2 && jQuery.isFunction( defer2.promise ) ? defer2 : window;
