@@ -2,5 +2,6 @@
 	"ajax/css": "CSS Transport",
 	"ajax/img": "Image Transport",
 	"ajax/xdr": "XDomainRequest Transport",
+	"callbacks/topic": "Publish/Subscribe",
 	"deferred/whenever": "When utility waiting for completion, no matter the end state"
 }
