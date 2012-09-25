@@ -1,4 +1,4 @@
-var cssHead = document.head || document.getElementsByTagName( "head" )[ 0 ] || document.documentElement,
+var cssHead = document.head || jQuery( "head" )[ 0 ] || document.documentElement,
 	cssEmptyURL = "data:text/css,",
 	cssNeedsPolling = jQuery.Deferred(function( defer ) {
 		var onload = cssLoad( { url: cssEmptyURL }, false, function() {

@@ -6,4 +6,4 @@
  *
  * Date: @DATE
  */
-(function( jQuery, document, undefined ) {
+(function( jQuery, undefined ) {
