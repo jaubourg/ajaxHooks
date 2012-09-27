@@ -2,6 +2,7 @@
 	"ajax/css": "CSS Transport",
 	"ajax/img": "Image Transport",
 	"ajax/laxjson": "Lax json parsing",
+	"ajax/validate": "Validation callback",
 	"ajax/xdr": "XDomainRequest Transport",
 	"callbacks/topic": "Publish/Subscribe",
 	"deferred/whenall": "Maps an array and uses it as an input to when or whenever",
