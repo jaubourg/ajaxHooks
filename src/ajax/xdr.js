@@ -30,7 +30,7 @@ if ( window.XDomainRequest ) {
 				},
 				abort: function() {
 					if ( xdr ) {
-						xdr.onerror = jQuery.noop();
+						xdr.onerror = jQuery.noop;
 						xdr.abort();
 					}
 				}
