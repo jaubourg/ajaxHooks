@@ -2,6 +2,7 @@
 	"ajax/css": "CSS Transport",
 	"ajax/img": "Image Transport",
 	"ajax/laxjson": "Lax json parsing",
+	"ajax/retry": "Retry callback",
 	"ajax/validate": "Validation callback",
 	"ajax/xdr": "XDomainRequest Transport",
 	"callbacks/topic": "Publish/Subscribe",
