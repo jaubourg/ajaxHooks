@@ -4,7 +4,8 @@ jQuery.Deferred = (function( Deferred ) {
 			done: "resolve",
 			fail: "reject",
 			progress: "notify"
-		};
+		},
+		slice = [].slice;
 
 	// Takes a callback and embeds it into a Promise/A enabler
 	// To be consumed by jQuery's implementation
@@ -54,7 +55,18 @@ jQuery.Deferred = (function( Deferred ) {
 	return function( fn ) {
 		var defer = Deferred(),
 			promise = {
-				then: then( defer )
+				then: then( defer ),
+				get: function( key ) {
+					return promise.then(function( data ) {
+						return data[ key ];
+					});
+				},
+				call: function( key ) {
+					var args = slice.call( arguments, 1 );
+					return promise.then(function( data ) {
+						return data[ key ].apply( data, args );
+					});
+				}
 			};
 		defer.promiseA = function() {
 			return promise;
