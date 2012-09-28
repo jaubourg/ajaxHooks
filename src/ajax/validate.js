@@ -14,8 +14,8 @@ jQuery.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
 				jqXHR.success = jqXHR.done;
 				jqXHR.error = jqXHR.fail;
 			}
-			jqXHR.fail( options.error );
 			jqXHR.abort();
+			jqXHR.fail( options.error );
 		}
 	}
 });
