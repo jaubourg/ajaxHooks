@@ -21,7 +21,7 @@ test( "basic counter", function() {
 	});
 });
 
-test( "test urls", function() {
+test( "test urls (success)", function() {
 	expect( 1 );
 	stop();
 	var URLs = [ "WILL_404_1", "WILL_404_2", "WILL_404_3", "data/proper.json" ];
@@ -41,6 +41,30 @@ test( "test urls", function() {
 		}, "proper data received" );
 	}).fail(function() {
 		strictEqual( arguments, [] );
+	}).always(function() {
+		start();
+	});
+});
+
+test( "test urls (fail)", function() {
+	expect( 3 );
+	stop();
+	var URLs = [ "WILL_404_1", "WILL_404_2", "WILL_404_3" ];
+	jQuery.ajax( URLs.shift(), {
+		dataType: "json",
+		retry: function( options, jqXHR ) {
+			var newURL = jqXHR.status === 404 && URLs.shift();
+			if ( newURL ) {
+				options.url = newURL;
+				return true;
+			}
+		}
+	}).done(function( data ) {
+		strictEqual( arguments, [] );
+	}).fail(function( jqXHR, type, error ) {
+		strictEqual( jqXHR.status, 404, "404 detected" );
+		strictEqual( type, "error", "error type OK" );
+		strictEqual( error, "Not Found", "status text OK" );
 	}).always(function() {
 		start();
 	});
