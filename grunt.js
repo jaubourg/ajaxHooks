@@ -26,15 +26,16 @@ module.exports = function( grunt ) {
 	}
 
 	var distpaths = [
-			"dist/jquery.ajaxhooks.js",
-			"dist/jquery.ajaxhooks.min.js"
+			"dist/ajaxhooks.js",
+			"dist/ajaxhooks.min.js"
 		],
 		files = (function() {
-			var files = [ "build/intro.js" ],
-				module;
-			for( module in readOptionalJSON( "build/modules.json" ) ) {
-				files.push( "src/" + module + ".js" );
-			}
+			var files = [ "build/intro.js" ];
+			grunt.file.recurse( "src", function( path ) {
+				if ( /\.js$/.test( path ) ) {
+					files.push( path );
+				}
+			});
 			files.push( "build/outro.js" );
 			return files;
 		})();
@@ -43,20 +44,22 @@ module.exports = function( grunt ) {
 		pkg: "<json:package.json>",
 		dst: "dist",
 		build: {
-			"dist/jquery.ajaxhooks.js": files
+			"dist/ajaxhooks.js": files
 		},
 		min: {
-			"dist/jquery.ajaxhooks.min.js": [ "dist/jquery.ajaxhooks.js" ]
+			"dist/ajaxhooks.min.js": [ "dist/ajaxhooks.js" ]
 		},
 
 		lint: {
-			dist: "dist/jquery.ajaxhooks.js",
-			grunt: "grunt.js",
-			tests: "test/unit/**/*.js"
+			src: "src/*.js",
+			dist: "dist/ajaxhooks.js",
+			tests: "test/unit/*.js",
+			grunt: "grunt.js"
 		},
 
 		jshint: {
 			options: jshintrc(),
+			src: jshintrc( "src/" ),
 			dist: jshintrc( "src/" ),
 			tests: jshintrc( "test/" )
 		},

@@ -10,7 +10,18 @@
 		}
 		$jquery_lib = "//code.jquery.com/jquery-$jquery_version.js";
 	}
-
+	
+	function getScriptsFrom( $dir ) {
+		if (( $dirH = opendir( $dir ) )) {
+			while( ( $file = readdir( $dirH ) ) !== false ) {
+				if ( strripos( $file, ".js", 0 ) === ( strlen( $file ) - 3 ) ) {
+					echo "\n\t<script src='$dir/$file'></script>";
+				}
+			}
+			closedir( $dirH );
+		}
+	}
+	
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr" id="html">
 <head>
@@ -24,19 +35,14 @@
 	<script src="<?= $jquery_lib ?>"></script>
 
 	<?php
-		$modules = json_decode( file_get_contents( "../build/modules.json" ), true );
-		foreach( $modules as $module => $_ ) {
-			?><script src="../src/<?= $module ?>.js"></script><?php
-		}
+		getScriptsFrom( "../src" );
 	?>
 
 	<script src="qunit/qunit/qunit.js"></script>
 	<script src="init.js"></script>
 
 	<?php
-		foreach( $modules as $module => $_ ) {
-			?><script src="unit/<?= $module ?>.js"></script><?php
-		}
+		getScriptsFrom( "unit" );
 	?>
 
 </head>
