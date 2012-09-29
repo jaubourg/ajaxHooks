@@ -1,4 +1,4 @@
-module( "ajax/retry", { teardown: moduleTeardown } );
+module( "retry", { teardown: moduleTeardown } );
 
 test( "basic counter", function() {
 	expect( 12 );

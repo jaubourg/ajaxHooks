@@ -1,4 +1,4 @@
-module( "callbacks/topic", { teardown: moduleTeardown } );
+module( "topic", { teardown: moduleTeardown } );
 
 test( "instantiate", function() {
 	expect( 3 );

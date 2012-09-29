@@ -1,4 +1,4 @@
-module( "deferred/whenever", { teardown: moduleTeardown } );
+module( "whenever", { teardown: moduleTeardown } );
 
 test( "single value" , function() {
 

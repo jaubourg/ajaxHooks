@@ -1,4 +1,4 @@
-module( "deferred/whenarray", { teardown: moduleTeardown } );
+module( "whenarray", { teardown: moduleTeardown } );
 
 test("when", function() {
 

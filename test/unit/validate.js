@@ -1,4 +1,4 @@
-module( "ajax/validate", { teardown: moduleTeardown } );
+module( "validate", { teardown: moduleTeardown } );
 
 test( "error returned", function() {
 	expect( 14 );

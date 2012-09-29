@@ -1,4 +1,4 @@
-module( "deferred/promisea", { teardown: moduleTeardown } );
+module( "promisea", { teardown: moduleTeardown } );
 
 jQuery.each( "resolve reject notify".split( " " ), function( i, method ) {
 

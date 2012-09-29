@@ -1,4 +1,4 @@
-module( "ajax/css", { teardown: moduleTeardown } );
+module( "css", { teardown: moduleTeardown } );
 
 test( "local", function() {
 	expect( 2 );

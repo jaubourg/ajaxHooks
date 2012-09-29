@@ -1,4 +1,4 @@
-module( "ajax/img", { teardown: moduleTeardown } );
+module( "img", { teardown: moduleTeardown } );
 
 test( "success", function() {
 	expect( 1 );

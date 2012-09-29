@@ -1,4 +1,4 @@
-module( "ajax/xdr", { teardown: moduleTeardown } );
+module( "xdr", { teardown: moduleTeardown } );
 
 if ( window.XDomainRequest || jQuery.support.cors ) {
 

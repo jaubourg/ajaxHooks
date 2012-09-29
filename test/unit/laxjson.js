@@ -1,4 +1,4 @@
-module( "ajax/laxjson", { teardown: moduleTeardown } );
+module( "laxjson", { teardown: moduleTeardown } );
 
 test("proper json", function() {
 	expect( 1 );

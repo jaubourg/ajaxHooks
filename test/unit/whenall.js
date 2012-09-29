@@ -1,4 +1,4 @@
-module( "deferred/whenall", { teardown: moduleTeardown } );
+module( "whenall", { teardown: moduleTeardown } );
 
 jQuery.each( "when whenever".split( " " ), function( _, method ) {
 	function ident( x ) {
