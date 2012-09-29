@@ -9,13 +9,15 @@ jQuery.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
 			error = e;
 		}
 		if ( error ) {
-			jQuery.Deferred().rejectWith( this, [ jqXHR, "validationerror", error ] ).promise( jqXHR );
+			jQuery.Deferred().rejectWith( context, [ jqXHR, "validationerror", error ] ).promise( jqXHR );
 			if ( jqXHR.success ) {
 				jqXHR.success = jqXHR.done;
 				jqXHR.error = jqXHR.fail;
+				jqXHR.complete = jQuery.Callbacks( "once memory" ).fireWith( context, [ jqXHR, "validationerror" ] ).add;
 			}
 			jqXHR.abort();
 			jqXHR.fail( options.error );
+			jqXHR.complete( options.complete );
 		}
 	}
 });
