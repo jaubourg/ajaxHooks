@@ -106,25 +106,30 @@ module.exports = function( grunt ) {
 		});
 
 	grunt.registerTask( "submodules", function() {
-		var done = this.async();
+		var done = this.async(),
+			cp = require("child_process");
 
 		grunt.verbose.write( "Updating submodules..." );
 
-		// TODO: migrate remaining `make` to grunt tasks
-		//
-		grunt.utils.spawn({
-			cmd: "make"
-		}, function( err, result ) {
-			if ( err ) {
+		cp.exec( "git submodule", function( err, stdout, stderr ) {
+			if ( err || stderr ) {
 				grunt.verbose.error();
-				done( err );
+				done( err || stderr );
 				return;
 			}
+			var cmd = "git submodule update --init --recursive" +
+					( /(?:^|\n)-/.test( stdout ) ? "" : " --merge" );
 
-			grunt.log.writeln( result );
+			grunt.log.writeln( cmd );
 
-			done();
+			cp.exec( cmd, function( err, stdout, stderr ) {
+				if ( err || stderr ) {
+					grunt.verbose.error();
+					done( err || stderr );
+					return;
+				}
+				done();
+			});
 		});
 	});
-
 };
