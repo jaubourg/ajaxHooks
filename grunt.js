@@ -49,21 +49,18 @@ module.exports = function( grunt ) {
 		min: {
 			"dist/ajaxhooks.min.js": [ "dist/ajaxhooks.js" ]
 		},
-
 		lint: {
 			src: "src/*.js",
 			dist: "dist/ajaxhooks.js",
 			tests: "test/unit/*.js",
 			grunt: "grunt.js"
 		},
-
 		jshint: {
 			options: jshintrc(),
 			src: jshintrc( "src/" ),
 			dist: jshintrc( "src/" ),
 			tests: jshintrc( "test/" )
 		},
-
 		uglify: {}
 	});
 
