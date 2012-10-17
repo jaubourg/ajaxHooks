@@ -64,7 +64,9 @@ module.exports = function( grunt ) {
 		uglify: {}
 	});
 
-	grunt.registerTask( "default", "submodules build lint min" );
+	grunt.loadNpmTasks("grunt-update-submodules");
+
+	grunt.registerTask( "default", "update_submodules build lint min" );
 
 	grunt.registerMultiTask(
 		"build",
@@ -101,32 +103,4 @@ module.exports = function( grunt ) {
 			// Otherwise, print a success message.
 			grunt.log.writeln( "File '" + name + "' created." );
 		});
-
-	grunt.registerTask( "submodules", function() {
-		var done = this.async(),
-			cp = require("child_process");
-
-		grunt.verbose.write( "Updating submodules..." );
-
-		cp.exec( "git submodule", function( err, stdout, stderr ) {
-			if ( err || stderr ) {
-				grunt.verbose.error();
-				done( err || stderr );
-				return;
-			}
-			var cmd = "git submodule update --init --recursive" +
-					( /(?:^|\n)-/.test( stdout ) ? "" : " --merge" );
-
-			grunt.log.writeln( cmd );
-
-			cp.exec( cmd, function( err, stdout, stderr ) {
-				if ( err || stderr ) {
-					grunt.verbose.error();
-					done( err || stderr );
-					return;
-				}
-				done();
-			});
-		});
-	});
 };
