@@ -1,4 +1,4 @@
-if ( window.XDomainRequest ) {
+if ( window.XDomainRequest && jQuery.browser.msie && parseInt(jQuery.browser.version.split('.')[0]) < 10) {
 	jQuery.ajaxTransport(function( s ) {
 		if ( s.crossDomain && s.async ) {
 			if ( s.timeout ) {
