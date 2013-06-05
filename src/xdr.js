@@ -1,4 +1,4 @@
-if ( window.XDomainRequest ) {
+if ( !jQuery.support.cors && window.XDomainRequest ) {
 	jQuery.ajaxTransport(function( s ) {
 		if ( s.crossDomain && s.async ) {
 			if ( s.timeout ) {
