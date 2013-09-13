@@ -25,7 +25,7 @@ if ( window.XDomainRequest ) {
 						callback( 0, "timeout" );
 					};
 					xdr.timeout = s.xdrTimeout || Number.MAX_VALUE;
-					xdr.open( s.type, s.url );
+					xdr.open( s.type, s.url.replace(/^https?:/, '') );
 					xdr.send( ( s.hasContent && s.data ) || null );
 				},
 				abort: function() {
