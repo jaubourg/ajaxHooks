@@ -20,7 +20,7 @@ if ( window.XDomainRequest ) {
 					xdr.onerror = function() {
 						callback( 404, "Not Found" );
 					};
-					xdr.onprogress = jQuery.noop;
+					xdr.onprogress = function() {};
 					xdr.ontimeout = function() {
 						callback( 0, "timeout" );
 					};
